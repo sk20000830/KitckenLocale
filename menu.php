@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+    <!-- Site Metas -->
+    <title>Menu</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- color -->
+    <link id="changeable-colors" rel="stylesheet" href="css/colors/orange.css" />
+
+    <!-- Modernizer -->
+    <script src="js/modernizer.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<?php
+
+    require "classes/user.php";
+
+    $user = new User();
+    $main = $user -> get_MmenuData();
+    $side = $user -> get_SmenuData();
+    $desert = $user -> get_DEmenuData();
+    $drink = $user -> get_DRmenuData();
+
+    session_start();
+
+    $Cid = $_SESSION["user_id"];
+    $status = $_SESSION["status"];
+
+
+?>
+
+<body>
+
+<div id="loader">
+        <div id="status"></div>
+</div>
+   <!-- navbar -->
+   <div id="site-header">
+        <header id="header" class="header-block-top">
+            <div class="container">
+                <div class="row">
+                    <div class="main-menu">
+                        <nav class="navbar navbar-default" id="mainNav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <div class="logo">
+                                    <a class="navbar-brand js-scroll-trigger logo-header" href="#">
+                                        <img src="images/logo.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="navbar" class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="home.php">Home</a></li>
+                                    <li class="active"><a href="menu.php">Menu</a></li>
+                                    <li><a href="about.php">About us</a></li>
+                    <?php   if($status == "U"){?>
+                                    <li><a href="cart.php?order_id=<?=$Oid?>" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>
+                                    <li><a href="profile.php?user_id=<?=$Cid?>" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
+                    <?php   }elseif($status == "A"){?>
+                                    <li><a href="admin/orders.php" style="font-size: 22px;"><i class="fas fa-cog"></i></a></li>
+                    <?php   }else{?>
+                                    <li><a href="login.php" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
+                    <?php   }?>
+                                </ul>
+                            </div>
+                            <!-- end nav-collapse -->
+                        </nav>
+                        <!-- end navbar -->
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </header>
+        <!-- end header -->
+    </div>
+	<!-- end site-header -->
+
+
+    <div class="team-main pad-top-100 pad-bottom-100 parallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                        <h2 class="block-title text-center">
+						MENU	
+					</h2>
+                        <p class="title-caption text-center">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end team-main -->
+
+
+    <!-- menu -->
+
+
+    <div id="menu" class="menu-main pad-top-100 pad-bottom-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                    <div class="tab-menu">
+                        <div class="slider slider-nav">
+                            <div class="tab-title-menu">
+                                <h2>SIDE DISHES</h2>
+                                <p> <i class="flaticon-canape"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>MAIN DISHES</h2>
+                                <p> <i class="flaticon-dinner"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>DESERTS</h2>
+                                <p> <i class="flaticon-desert"></i> </p>
+                            </div>
+                            <div class="tab-title-menu">
+                                <h2>DRINKS</h2>
+                                <p> <i class="flaticon-coffee"></i> </p>
+                            </div>
+                        </div>       
+                        <div class="slider slider-single">
+                            <!-- side dishes -->
+                                <?php foreach($side as $menuD){?>
+                                    <a href="actions/add-to-cart.php?menu_id=<?=$menuD['menu_id']?>">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                            <div class="offer-item" style="height: 100px;">
+                                                <img src="images/menu_pictures/<?=$menuD['menu_pic']?>" alt="" class="img-responsive">
+                                                <div>
+                                                    <h3><?=$menuD["menu_name"]?></h3>
+                                                    <p>
+                                                        <?=$menuD["ingredient"]?>
+                                                    </p>
+                                                </div>
+                                                <span class="offer-price"> <?=$menuD["menu_price"]?>$</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php }?>
+                                <!-- end col -->
+                            <!-- main dishes -->
+                            <div>
+                                <?php foreach($main as $menuD){?>
+                                    <a href="actions/add-to-cart.php?menu_id=<?=$menuD['menu_id']?>">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                            <div class="offer-item" style="height: 100px;">
+                                                <img src="images/menu_pictures/<?=$menuD['menu_pic']?>" alt="" class="img-responsive">
+                                                <div>
+                                                    <h3><?=$menuD["menu_name"]?></h3>
+                                                    <p>
+                                                        <?=$menuD["ingredient"]?>
+                                                    </p>
+                                                </div>
+                                                <span class="offer-price"> <?=$menuD["menu_price"]?>$</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php }?>
+                                <!-- end col -->
+                            </div>
+                            <!-- desert -->
+                            <div>
+                                <?php foreach($desert as $menuD){?>
+                                    <a href="actions/add-to-cart.php?menu_id=<?=$menuD['menu_id']?>">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                            <div class="offer-item" style="height: 100px;">
+                                                <img src="images/menu_pictures/<?=$menuD['menu_pic']?>" alt="" class="img-responsive">
+                                                <div>
+                                                    <h3><?=$menuD["menu_name"]?></h3>
+                                                    <p>
+                                                        <?=$menuD["ingredient"]?>
+                                                    </p>
+                                                </div>
+                                                <span class="offer-price"> <?=$menuD["menu_price"]?>$</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php }?>
+                                <!-- end col -->
+                            </div>
+                            <!-- drink -->
+                            <div>
+                                <?php foreach($drink as $menuD){?>
+                                    <a href="actions/add-to-cart.php?menu_id=<?=$menuD['menu_id']?>">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+                                            <div class="offer-item" style="height: 100px;">
+                                                <img src="images/menu_pictures/<?=$menuD['menu_pic']?>" alt="" class="img-responsive">
+                                                <div>
+                                                    <h3><?=$menuD["menu_name"]?></h3>
+                                                    <p>
+                                                        <?=$menuD["ingredient"]?>
+                                                    </p>
+                                                </div>
+                                                <span class="offer-price"> <?=$menuD["menu_price"]?>$</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                <?php }?>
+                                <!-- end col -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end menu -->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="#" class="scrollup" style="display: none;">Scroll</a>
+
+    <!-- ALL JS FILES -->
+    <script src="js/all.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="js/custom.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+
+</html>
