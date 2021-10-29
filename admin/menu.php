@@ -10,10 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <?php
+        session_start();
+        $status = $_SESSION["status"];
+    
         require "../classes/admin.php";
 
+        $category = $_GET["category"];
+
         $admin = new Admin();
-        $menuData = $admin -> get_menuData();
+        $menuData = $admin -> get_menuData($category);
+        $admin->check_status($status);
     ?>
 </head>
 <body>
@@ -53,7 +59,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>
@@ -70,6 +76,16 @@
     </div>
     <div class="row mt-5">
         <div class="col-10 mx-auto">
+            <form action="menu.php" method="get">
+                <select name="category" id="">
+                    <option value="">All</option>
+                    <option value="Main">Main</option>
+                    <option value="Side">Side</option>
+                    <option value="Desert">Desert</option>
+                    <option value="Drink">Drink</option>
+                </select>
+                <button>Sort</button>
+            </form>
             <table class="table table-striped table-bordered mt-4">
                 <thead>
                     <tr>
@@ -103,7 +119,7 @@
                         <td><?=$data['menu_name']?></td>
                         <td><?=$data['ingredient']?></td>
                         <td><?=$data['category']?></td>
-                        <td><?=$data['menu_price']?></td>
+                        <td><?=$data['menu_price']?>$</td>
                         <td><?=$data['menu_pic']?></td>
                         <td class="text-center">
                             <a href='edit-menu.php?menu_id=<?=$data['menu_id']?>' class='btn btn-info text-white mb-2'>Update</a>                

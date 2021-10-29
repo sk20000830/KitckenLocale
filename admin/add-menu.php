@@ -9,6 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<?php
+        session_start();
+        $status = $_SESSION["status"];
+
+        require "../classes/admin.php";
+
+        $admin = new Admin();
+        $admin->check_status($status);
+?>
 <body>
 
 
@@ -48,7 +57,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>
@@ -63,8 +72,8 @@
     <div class="row mt-5">
         <div class="col-6 mx-auto">
             <form action="../actions/add-menu.php" method="post" enctype="multipart/form-data">
-                Menu name <input type="text" name="Mname" class="form-control" required autofocus>
-                Ingredient <input type="text" name="ingredient" class="form-control" required>
+                Product name <input type="text" name="Mname" class="form-control" required autofocus>
+                Ingredient <input type="text" name="ingredient" class="form-control">
                 <div class="row">
                     <div class="col">
                             Category

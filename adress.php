@@ -30,53 +30,53 @@
 
 
 
-    <div id="menu" class="mb-5 pt-5" >
+    <div class="mb-5 pt-5" >
         <div class="container">
             <div class="mx-auto text-center">
                 <a href="menu.php" class="btn btn-danger "><i class="fas fa-arrow-left"></i> Go Back to Menu</a>
             </div>
             <div class="text-center fs-5 mt-5">
-                <span class="border border-2 border-dark rounded px-5 py-1 me-1">SHOPPING CART</span>
+                <span class="border border-2 border-dark rounded px-5 py-1 me-1">Shopping Cart</span>
                 <i class="fas fa-caret-right"></i>
                 <span class="border border-2 border-dark bg-dark text-light rounded  px-5 py-1 me-1">Input Adress</span>
                 <i class="fas fa-caret-right"></i>
                 <span class="border border-2 border-dark rounded px-5 py-1 me-1">Order Confirmation</span>
                 <i class="fas fa-caret-right"></i>
-                <span class="border border-2 border-dark rounded px-5 py-1">SHOPPING CART</span>
+                <span class="border border-2 border-dark rounded px-5 py-1">Order Completed</span>
             </div>
+        </div>
 
-            <div class="container" style="margin-left: auto;margin-right: auto; margin-top: 100px; width: 500px;">
-        <h1 class="mt-5 text-center block-title" style="margin-top: 20px; margin-bottom: 40px;">Input your information</h1>
-        <form action="actions/edit-adress.php" method="post">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="fname">First Name</label><br>
-                    <input type="text" name="fname" id="fname" value="<?=$Udata['first_name']?>" class="form-control" required auto-focus>
-                </div>
-                <div class="col-md-6">
-                    <label for="lname">Last Name</label><br>
-                    <input type="text" name="lname" id="lname" value="<?=$Udata['last_name']?>" class="form-control" required>
-                </div>
-            </div> 
-                    <label for="contact">Phone Number</label><br>
-                    <input type="tel" name="contact" id="contact" value="<?=$Udata['contact_number']?>" class="form-control" required>
-                    <label for="email">E-mail</label><br>
-                    <input type="email" name="email" id="emali" value="<?=$Udata['email']?>" class="form-control" required>
-                    <label for="adress">Adress</label><br>
-                    <input type="text" name="adress" id="adress" value="<?=$Udata['adress']?>" class="form-control" required>
-                    <br>
-                    <button class="form-control btn btn-warning hvr-underline-from-center">Update</button>
-                <!-- <input class="orange-btn form-control hvr-underline-from-center" type="submit" name="login" value="Login"> -->
-        </form>
-        <br>
-        <p class="text-center text-decoration-none"><a href="profile.php" class="text-muted">Cancel</a></p>
+        <div class="container" style="margin-left: auto;margin-right: auto; margin-top: 100px; width: 500px;">
+            <h1 class="mt-5 text-center block-title" style="margin-top: 20px; margin-bottom: 40px;">Input your adress</h1>
+            <form action="actions/edit-adress.php" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="fname">First Name</label><br>
+                        <input type="text" name="fname" id="fname" value="<?=$Udata['first_name']?>" class="form-control" required auto-focus>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lname">Last Name</label><br>
+                        <input type="text" name="lname" id="lname" value="<?=$Udata['last_name']?>" class="form-control" required>
+                    </div>
+                </div> 
+                <label for="contact">Phone Number</label><br>
+                <input type="tel" name="contact" id="contact" value="<?=$Udata['contact_number']?>" class="form-control" required>
+                <label for="email">E-mail</label><br>
+                <input type="email" name="email" id="emali" value="<?=$Udata['email']?>" class="form-control" required>
+                <label for="adress">Adress</label><br>
+                <input type="text" name="adress" id="adress" value="<?=$Udata['adress']?>" class="form-control" required>
+                <br>
+                <div class="row mt-3">
+                    <div class="col text-end">
+                        <a href="cart.php" class="btn btn-secondary w-50">Back</a>
+                    </div>
+                    <div class="col text-start">
+                        <button class="btn btn-warning hvr-underline-from-center w-50">Next</button>
+                    </div>
+                </div>                    
+            </form>
+        </div>
     </div>
-
-            </div>
-        <!-- end container -->
-    </div>
-    <!-- end menu -->
-    
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

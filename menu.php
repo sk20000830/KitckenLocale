@@ -80,7 +80,7 @@
                                 </button>
                                 <div class="logo">
                                     <a class="navbar-brand js-scroll-trigger logo-header" href="#">
-                                        <img src="images/logo.png" alt="">
+                                      <img src="images/logo-locale.png" alt="" style="width: 300px;"> 
                                     </a>
                                 </div>
                             </div>
@@ -88,10 +88,9 @@
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="home.php">Home</a></li>
                                     <li class="active"><a href="menu.php">Menu</a></li>
-                                    <li><a href="about.php">About us</a></li>
                     <?php   if($status == "U"){?>
-                                    <li><a href="cart.php?order_id=<?=$Oid?>" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>
-                                    <li><a href="profile.php?user_id=<?=$Cid?>" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
+                                    <li><a href="cart.php" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>
+                                    <li><a href="profile.php" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
                     <?php   }elseif($status == "A"){?>
                                     <li><a href="admin/orders.php" style="font-size: 22px;"><i class="fas fa-cog"></i></a></li>
                     <?php   }else{?>
@@ -113,7 +112,7 @@
 	<!-- end site-header -->
 
 
-    <div class="team-main pad-top-100 pad-bottom-100 parallax">
+    <div class="team-main parallax pad-top-100" style="height: 400px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -121,7 +120,6 @@
                         <h2 class="block-title text-center">
 						MENU	
 					</h2>
-                        <p class="title-caption text-center">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
                     </div>
                 </div>
                 <!-- end col -->
@@ -161,6 +159,7 @@
                         </div>       
                         <div class="slider slider-single">
                             <!-- side dishes -->
+                            <div>
                                 <?php foreach($side as $menuD){?>
                                     <a href="actions/add-to-cart.php?menu_id=<?=$menuD['menu_id']?>">
                                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
@@ -177,6 +176,7 @@
                                         </div>
                                     </a>
                                 <?php }?>
+                            </div>
                                 <!-- end col -->
                             <!-- main dishes -->
                             <div>
@@ -250,13 +250,145 @@
     <!-- end menu -->
     
 
+    <div id="footer" class="footer-main">
+        <div class="footer-news pad-top-100 pad-bottom-70 parallax">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.1s">
+                            <h2 class="ft-title color-white text-center"> Newsletter </h2>
+                        </div>
+                        <form>
+                            <input type="email" placeholder="Enter your e-mail id">
+                            <a href="#" class="orange-btn"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
+                        </form>
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end footer-news -->
+        <div class="footer-box pad-top-70">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-in-main">
+                        <div class="footer-logo">
+                            <div class="text-center">
+                                <img src="images/logo-locale.png" alt="" style="width: 400px;">
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-a">
+                                <h3>About Us</h3>
+                                <p>Like all great stories, we have a beginning: It’s the 1980s and Amadeus arrives in America. After a series of misadventures,
+                             he opens a deli in Soho NYC. </p>
+                                <ul class="socials-box footer-socials pull-left">
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa  fa-facebook"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-twitter"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-google-plus"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-pinterest"></i></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="social-circle-border"><i class="fa fa-linkedin"></i></div>
+                                        </a>
+                                    </li>
+                                </ul>
 
+                            </div>
+                            <!-- end footer-box-a -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-b">
+                                <h3>New Menu</h3>
+                                <ul>
+                                    <?php for($counter = 0; $counter < 4; $counter++){?>
+                                                <li><a href="menu.php"><?=$Pname[$counter]?></a></li>
+                                    <?php }?>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-b -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-c">
+                                <h3>Contact Us</h3>
+                                <p>
+                                    <i class="fa fa-map-signs" aria-hidden="true"></i>
+                                    <span>6 E Esplanade, St Albans VIC 3021, New York City</span>
+                                </p>
+                                <p>
+                                    <i class="fa fa-mobile" aria-hidden="true"></i>
+                                    <span>
+									+91 80005 89080 
+								</span>
+                                </p>
+                                <p>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <span>support@kitchenlocale.com</span>
+                                </p>
+                            </div>
+                            <!-- end footer-box-c -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-d">
+                                <h3>Opening Hours</h3>
 
-
-
-
-
-
+                                <ul>
+                                    <li>
+                                        <p>Monday - Thursday </p>
+                                        <span> 10:00 AM - 22:00 PM</span>
+                                    </li>
+                                    <li>
+                                        <p>Friday - Saturday </p>
+                                        <span>  10:00 AM - 22:00 PM</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end footer-box-d -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end footer-in-main -->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+            <div id="copyright" class="copyright-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h6 class="copy-title"> Copyright &copy; 2021 Kitcken Locale</h6>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end copyright-main -->
+        </div>
+        <!-- end footer-box -->
+    </div>
+    <!-- end footer-main -->
 
 
 

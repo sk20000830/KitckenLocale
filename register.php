@@ -51,7 +51,7 @@
     
     <!-- navbar -->
     <div id="site-header">
-        <header id="header" class="header-block-top">
+        <header id="header" class="header-block-top" style="background-color: black;">
             <div class="container">
                 <div class="row">
                     <div class="main-menu">
@@ -65,7 +65,7 @@
                                 </button>
                                 <div class="logo">
                                     <a class="navbar-brand js-scroll-trigger logo-header" href="#">
-                                        <img src="images/logo.png" alt="logo">
+                                        <img src="images/logo-locale.png" alt="" style="width: 300px;">
                                     </a>
                                 </div>
                             </div>
@@ -73,7 +73,6 @@
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="home.php">Home</a></li>
                                     <li><a href="menu.php">Menu</a></li>
-                                    <li><a href="about.php">About us</a></li>
                     <?php   if($_SESSION["role"] == "U"){?>
                                     <li><a href="cart.php" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>
                                     <li><a href="profile.php" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
@@ -101,7 +100,7 @@
 
 
     <div class="container" style="margin-left: auto;margin-right: auto; margin-top: 100px; width: 600px;">
-        <h1 class="mt-5 text-center block-title" style="margin-top: 20px; margin-bottom: 40px;">Sign Up</h1>
+        <h1 class="mt-5 text-center block-title" style="margin-top: 100px; margin-bottom: 40px;">Sign Up</h1>
         <form action="actions/register.php" method="post">
             <div class="row">
                 <div class="col-md-6">
@@ -129,6 +128,18 @@
         <p class="text-center text-decoration-none"><a href="login.php" class="text-muted">Have an Account</a></p>
     </div>
 
+    <div id="copyright" class="copyright-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h6 class="copy-title"> Copyright &copy; 2021 Kitcken Locale</h6>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end copyright-main -->
 
 
 

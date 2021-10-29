@@ -114,7 +114,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }                    
         }
 
@@ -130,7 +130,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }                    
         }
 
@@ -145,7 +145,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
         }
 
@@ -162,7 +162,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
         }
 
@@ -214,25 +214,6 @@ class User extends Database{
             return $menuData;
         }
 
-        // public function insert_order($Ctime){
-
-        //     $sql = "INSERT INTO order(date) VALUES('$Ctime')";
-
-        //     if($this->conn->query($sql))
-        //     {
-        //         $lastID = $this->conn->insert_id;
-
-        //         session_start();
-        //         $_SESSION["order_id"] = $lastID;
-                
-        //     }
-        //     else
-        //     {
-        //         echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
-        //     }
-
-        // }
-
         public function get_menuPrice($menuID){
 
             $sql = "SELECT * FROM menu where menu_id = '$menuID'";
@@ -246,7 +227,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
         }
 
@@ -268,7 +249,7 @@ class User extends Database{
                 }
                 else
                 {
-                    echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                    echo "<p class='alert text-center'>".$this->conn->error."</p>";
                 }
             }
             else
@@ -281,7 +262,7 @@ class User extends Database{
                 }
                 else
                 {
-                    echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                    echo "<p class='alert text-center'>".$this->conn->error."</p>";
                 }
             }
                 
@@ -303,7 +284,7 @@ class User extends Database{
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
             
         }
@@ -345,9 +326,12 @@ class User extends Database{
                 while($row = $result->fetch_assoc())
                 {
                     $sub += $row['subtotal'];
-                }
-                
+                }             
                 return $sub;
+            }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
         }
 
@@ -362,12 +346,156 @@ class User extends Database{
 
                 return $row["delivery_fee"];
             }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
+            }
         }
 
-        public function sum_total($sub, $Dfee){
+        public function sum_total($Cid){
             
+            $sub = $this->sum_subtotal($Cid);
+            $Dfee = $this->get_Dfee();
             return $sub + $Dfee;
         }
+
+        public function sum_quantity($Cid){
+
+            $sql = "SELECT * FROM cart WHERE user_id = '$Cid'";
+            $result = $this->conn->query($sql);
+            $totalQ = 0;
+
+            if($result == TRUE)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $totalQ += $row['quantity'];
+                }
+                return $totalQ;
+            }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
+            }  
+        }
+
+        public function organize_info($selectD, $pretime, $insttime, $open, $close, $Aonehour){
+
+            if($selectD == "instant")
+            {
+                if($insttime >= $open && $insttime <= $close)
+                {
+                    return $insttime;
+                }
+                else
+                {
+                    header("Location: delivery-info.php?message=unavailable");
+                }    
+            }
+            elseif($selectD == "pre")
+            {
+                if($pretime >= $open && $pretime <= $close && $pretime >= $Aonehour)
+                {
+                    return $pretime;
+                }
+                else
+                {
+                    header("Location: delivery-info.php?message=unavailable");
+                }            
+            }
+        }
+
+        public function add_order($orderD, $deliveryT, $totalQ, $totalP, $note, $Cid){
+
+            //insert into orders table
+            $sql = "INSERT INTO orders(order_date, delivery_time, total_quantity, total_price, note, user_id) VALUES('$orderD', '$deliveryT', '$totalQ', '$totalP', '$note', '$Cid')";
+            $result = $this->conn->query($sql);
+            $orderID = $this->conn->insert_id;
+            
+            if($result == TRUE)
+            {
+                //update order_count
+                $sql = "SELECT * FROM orders WHERE user_id = '$Cid'";
+                $result = $this->conn->query($sql);
+                $Ocount = $result->num_rows;
+                $sql = "UPDATE users SET order_count = '$Ocount' WHERE user_id = '$Cid'";
+
+                if($this->conn->query($sql))
+                {
+                    //get cart data
+                    $sql = "SELECT * FROM cart WHERE user_id = '$Cid'";
+                    $result = $this->conn->query($sql);
+
+                    while($row = $result->fetch_assoc())
+                    {
+                        //insert into order_items table
+                        $productID = $row["product_id"];
+                        $quantity = $row["quantity"];
+                        $sql = "INSERT INTO order_items(order_id, product_id, quantity) VALUES('$orderID', '$productID', '$quantity')";
+
+                        if($this->conn->query($sql))
+                        {
+                            $sql = "DELETE FROM cart WHERE user_id = '$Cid'";
+                            if($this->conn->query($sql))
+                            {
+                                header("Location: ../order-success.php?order_id=$orderID");
+                            }
+                            else
+                            {
+                                echo $this->conn->error;
+                            }   
+                        }   
+                        else
+                        {
+                            echo $this->conn->error;
+                        }             
+                    }
+                }
+                else
+                {
+                    echo $this->conn->error;
+                }
+            }
+            else
+            {
+                echo $this->conn->error;
+            }  
+        } 
+
+        public function get_deliveryTime($Oid){
+
+            $sql = "SELECT * FROM orders WHERE order_id = '$Oid'";
+            $result = $this->conn->query($sql);
+
+            if($result == TRUE)
+            {
+                return $result->fetch_assoc();;
+            }
+            else
+            {
+                echo $this->conn->error;
+            } 
+        }
+
+        public function get_productName(){
+
+            $sql = "SELECT * FROM menu LIMIT 4";
+            $result = $this->conn->query($sql);
+
+            if($result == TRUE)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $Pname[] = $row["menu_name"];
+                }
+                    return $Pname;
+            }
+            else
+            {
+                echo $this->conn->error;
+            } 
+        }
+        
 
 }
 

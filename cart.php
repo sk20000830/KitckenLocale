@@ -23,7 +23,7 @@
     $orderData = $user -> get_cartData($Cid);
     $sub = $user -> sum_subtotal($Cid);
     $Dfee = $user -> get_Dfee();
-    $total = $user -> sum_total($sub, $Dfee);
+    $total = $user -> sum_total($Cid);
 ?>
 
 <body>
@@ -32,19 +32,19 @@
 
 
 
-    <div id="menu" class="mb-5 pt-5" >
+    <div class="mb-5 pt-5" >
         <div class="container">
             <div class="mx-auto text-center">
                 <a href="menu.php" class="btn btn-danger "><i class="fas fa-arrow-left"></i> Go Back to Menu</a>
             </div>
             <div class="text-center fs-5 mt-5">
-                <span class="border border-2 border-dark bg-dark text-light rounded px-5 py-1 me-1">SHOPPING CART</span>
+                <span class="border border-2 border-dark bg-dark text-light rounded px-5 py-1 me-1">Shopping Cart</span>
                 <i class="fas fa-caret-right"></i>
                 <span class="border border-2 border-dark rounded  px-5 py-1 me-1">Input Adress</span>
                 <i class="fas fa-caret-right"></i>
                 <span class="border border-2 border-dark rounded px-5 py-1 me-1">Order Confirmation</span>
                 <i class="fas fa-caret-right"></i>
-                <span class="border border-2 border-dark rounded px-5 py-1">SHOPPING CART</span>
+                <span class="border border-2 border-dark rounded px-5 py-1">Order Completed</span>
             </div>
             <div class="row mt-5">
                 <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 mx-auto mt-5">         
@@ -106,8 +106,14 @@
                             </tr>
                     </table>    
                     <div colspan="4" class="text-center">
-                                    <a href="adress.php" class="btn btn-warning" style="width: 100px;">NEXT</a>
-                    </div>                                                                                      
+                        <?php if(!empty($orderData)){?>
+                            <a href="adress.php" class="btn btn-warning" style="width: 100px;">Next</a>
+                        <?php }else{?>
+                            <a href="cart.php" class="btn btn-warning" style="width: 100px;">Next</a>
+                            <p class="text-danger"> Please select products</p>
+                        <?php }?>     
+                        <p></p>
+                    </div>     
                 </div>
                 <!-- end col -->
             </div>

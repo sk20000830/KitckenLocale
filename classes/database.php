@@ -16,13 +16,13 @@
             $this->conn = new mysqli($this->servername, $this->username,$this->password,$this->database);
 
             //check if the connection is okay
-            if($conn->connect_error)
+            if($this->conn->connect_error)
             {
                 die("Connection failed: " .$this->database. ":" .$this->conn->connect_error);
             }
             else
             {
-                return $conn;
+                return $this->conn;
             }
         }
             

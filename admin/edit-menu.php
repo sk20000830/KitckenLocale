@@ -11,6 +11,8 @@
 </head>
 
 <?php
+    session_start();
+    $status = $_SESSION["status"];
 
     require "../classes/admin.php";
 
@@ -18,6 +20,7 @@
 
     $admin = new Admin();
     $menu = $admin -> get_1menuData($Cmenu);
+    $admin->check_status($status);
 
 ?>
 
@@ -61,7 +64,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>

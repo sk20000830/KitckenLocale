@@ -10,11 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <?php
+        session_start();
+        $status = $_SESSION["status"];
+        
         require "../classes/admin.php";
 
         $Cmenu = $_GET["menu_id"];
         $admin = new Admin();
         $menu = $admin -> get_1menuData($Cmenu);
+        $admin->check_status($status);
     ?>
 </head>
 <body>
@@ -54,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>

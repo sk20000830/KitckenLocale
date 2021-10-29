@@ -9,6 +9,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+    <?php
+        session_start();
+        $status = $_SESSION["status"];
+
+        $Ostatus = $_GET["Ostatus"];
+        $email = $_GET["email"];
+
+        require "../classes/admin.php";
+        $admin = new Admin();
+        $Dtime = $admin -> display_delivery();
+        $Dstatus = $admin -> get_Dstatus();
+        $orderdata = $admin -> get_orderData($Ostatus, $email);
+        $admin->check_status($status);
+    ?>
 <body>
 
 
@@ -48,7 +62,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>
@@ -57,15 +71,7 @@
         </div>
 </nav>
 
-<div class="container mt-5">
-    <?php
-        require "../classes/admin.php";
-        $admin = new Admin();
-        $Dtime = $admin -> display_delivery();
-        $Dstatus = $admin -> get_Dstatus();
-        $orderdata = $admin -> get_orderData();
-        
-    ?>
+<div class="container my-5">
     <form action="../actions/edit-orders.php" method="post" class="w-50 mx-auto pe-3 text-center">
                 delivery time:
                 <input type="number" name="Dtime" class="" value="<?=$Dtime['delivery_time']?>">
@@ -77,47 +83,68 @@
 
     <div class="row mt-5">
         <div class="col-10 mx-auto">
+            <form action="orders.php" method="get">
+                <div class="row mx-auto" style="width: 500px;">
+                    <div class="col text-start">
+                        <select name="Ostatus" id="" class="form-select">
+                            <option value="">All</option>
+                            <option value="Not Delivered">Not Delivered</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
+                    </div>
+                    <div class="col text-end">
+                        <input type="email" name="email" id="" class="form-control" placeholder="E-mail">
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary">Search</button>
+                    </div>
+                </div>          
+                
+            </form>
             <table class="table table-striped table-bordered mt-4">
                 <thead>
                     <tr>
                         <th>
-                        #
-                        </th>
-                        <th>
-                            Order time
+                            #
                         </th>
                         <th>
                             Name
                         </th>
                         <th>
-                            adress
+                            Order Date
                         </th>
                         <th>
-                            order count
+                            Delivery Time
                         </th>
                         <th>
-                            contact number
+                            Total Quantity
                         </th>
                         <th>
-                            total price
+                            Total Price
                         </th>
                         <th>
-
+                           Phone Number
                         </th>
+                        <th></th>
                     </tr>
                     
                 </thead>
                 <tbody>
-                    <?php foreach($orderdata as $order){?>
-                    <tr>
-                        <td><?=$order['order_id']?></td>
-                        <td><?=$order['order_time']?></td>
-                        <td><?=$order['user_name']?></td>
-                        <td><?=$order['adress']?></td>
-                        <td><?=$order['order_count']?></td>
-                        <td><?=$order['contact_number']?></td>
-                        <td><?=$order['total_price']?></td>
-                    </tr>
+                    <?php foreach($orderdata as $order){
+                            if($order["order_status"] == "Not Delivered"){?>
+                                <tr class="table table-danger">
+                    <?php   }elseif($order["order_status"] == "Delivered"){?>     
+                                <tr>
+                    <?php   }?>
+                                    <td><?=$order['order_id']?></td>
+                                    <td><?=$order['first_name']?> <?=$order['last_name']?></td>
+                                    <td><?=$order['order_date']?></td>
+                                    <td><?=$order['delivery_time']?></td>
+                                    <td><?=$order['total_quantity']?></td>
+                                    <td><?=$order['total_price']?>$</td>
+                                    <td><?=$order['contact_number']?></td>
+                                    <td class="text-center"><a href="order-details.php?order_id=<?=$order['order_id']?>" class="btn btn-info">Details</a></td>
+                                </tr>
                     <?php }?>
                 </tbody>
             </table>

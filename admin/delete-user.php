@@ -10,11 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <?php
+        session_start();
+        $status = $_SESSION["status"];
+
         require "../classes/admin.php";
 
         $userID = $_GET["user_id"];
         $admin = new Admin();
         $user = $admin -> get_1userData($userID);
+        $admin->check_status($status);
     ?>
 </head>
 <body>
@@ -40,7 +44,7 @@
                     </li>
                     <li class="nav-item mx-3">
                         <a href="users.php" 
-                          class="nav-link" active>Users
+                          class="nav-link active" >Users
                         </a>
                     </li>    
                     <li class="nav-item mx-3">
@@ -54,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item mx-3">
-                       <a href="../login.php" 
+                       <a href="../logout.php" 
                           class="nav-link">Logout
                         </a>
                     </li>

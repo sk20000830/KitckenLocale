@@ -77,16 +77,31 @@
             }
         }
 
-        public function get_menuData(){
+        public function get_menuData($category){
 
-            $sql = "SELECT * FROM menu";
-            $result = $this->conn->query($sql);
-
-            while($row = $result->fetch_assoc())
+            if(empty($category))
             {
-                $menuData[] = $row;
+                $sql = "SELECT * FROM menu";
+                $result = $this->conn->query($sql); 
+                while($row = $result->fetch_assoc())
+                {
+                    $menuData[] = $row;
+                }
+                return $menuData;
             }
-            return $menuData;
+            else
+            {
+                $sql = "SELECT * FROM menu WHERE category = '$category'";
+                $result = $this->conn->query($sql); 
+                while($row = $result->fetch_assoc())
+                {
+                    $menuData[] = $row;
+                }
+                return $menuData;
+            }
+            
+
+           
         }
 
         public function get_1menuData($Cmenu){
@@ -150,24 +165,41 @@
             }        
         }
 
-        public function get_userData(){
+        public function get_userData($email){
 
-            $sql = "SELECT * FROM users WHERE status != 'A'";
-            $result = $this->conn->query($sql);
-
-            if($result == TRUE)
+            if(empty($email))
             {
-                while($row = $result->fetch_assoc())
+                $sql = "SELECT * FROM users WHERE status != 'A'";
+                $result = $this->conn->query($sql);
+
+                if($result == TRUE)
                 {
-                    $userData[] = $row;
+                    while($row = $result->fetch_assoc())
+                    {
+                        $userData[] = $row;
+                    }
                 }
+                else
+                {
+                    echo $this->conn->erorr;
+                }   
+                return $userData;
             }
             else
             {
-                echo $this->conn->erorr;
-            }   
-
-            return $userData;
+                $sql = "SELECT * FROM users WHERE status != 'A' AND email = '$email'";
+                $result = $this->conn->query($sql);
+                
+                if($result->num_rows == 1)
+                {
+                    return $result->fetch_assoc();
+                }
+                else
+                {
+                    header("Location: users.php?message=nouser");
+                }   
+            }
+            
         }
 
         public function get_1userData($userID){
@@ -242,9 +274,95 @@
             }
         }
 
-        public function get_orderData(){
+        public function get_orderData($Ostatus, $email){
 
-            $sql = "SELECT * FROM order INNER JOIN users ON users.user_id = order.user_id";
+            if(empty($Ostatus))
+            {
+                if(empty($email))
+                {
+                    $sql = "SELECT * FROM orders INNER JOIN users ON users.user_id = orders.user_id ORDER BY orders.order_id DESC ";
+                    $result = $this->conn->query($sql);
+
+                    if($result == TRUE)
+                    {
+                        while($row = $result->fetch_assoc())
+                        {
+                            $orderData[] = $row;
+                        }
+
+                        return $orderData;
+                    }
+                    else
+                    {
+                        echo "<p class='alert text-center'>".$this->conn->error."</p>";
+                    }
+                }
+                else
+                {
+                    $sql = "SELECT * FROM orders INNER JOIN users ON users.user_id = orders.user_id WHERE users.email = '$email' ORDER BY orders.order_id DESC ";
+                    $result = $this->conn->query($sql);
+
+                    if($result == TRUE)
+                    {
+                        while($row = $result->fetch_assoc())
+                        {
+                            $orderData[] = $row;
+                        }
+
+                        return $orderData;
+                    }
+                    else
+                    {
+                        echo "<p class='alert text-center'>".$this->conn->error."</p>";
+                    } 
+                }
+            }
+            else
+            {
+                if(empty($email))
+                {
+                    $sql = "SELECT * FROM orders INNER JOIN users ON users.user_id = orders.user_id WHERE order_status = '$Ostatus' ORDER BY orders.order_id DESC";
+                    $result = $this->conn->query($sql);
+
+                    if($result == TRUE)
+                    {
+                        while($row = $result->fetch_assoc())
+                        {
+                            $orderData[] = $row;
+                        }
+
+                        return $orderData;
+                    }
+                    else
+                    {
+                        echo "<p class='alert text-center'>".$this->conn->error."</p>";
+                    }
+                }
+                else
+                {
+                    $sql = "SELECT * FROM orders INNER JOIN users ON users.user_id = orders.user_id WHERE orders.order_status = '$Ostatus' AND users.email = '$email' ORDER BY orders.order_id DESC";
+                    $result = $this->conn->query($sql);
+
+                    if($result == TRUE)
+                    {
+                        while($row = $result->fetch_assoc())
+                        {
+                            $orderData[] = $row;
+                        }
+
+                        return $orderData;
+                    }
+                    else
+                    {
+                        echo "<p class='alert text-center'>".$this->conn->error."</p>";
+                    }
+                }
+            }
+        }
+
+        public function get_1userOrderData($Cid){
+
+            $sql = "SELECT * FROM orders WHERE user_id = '$Cid' ORDER BY order_id DESC";
             $result = $this->conn->query($sql);
 
             if($result == TRUE)
@@ -258,11 +376,75 @@
             }
             else
             {
-                echo "<p class='alert text-center'>".$this->conn->erorr."</p>";
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
             }
-
-
         }
+
+        public function get_1orderData($Oid){
         
+            $sql = "SELECT * FROM orders INNER JOIN users ON users.user_id = orders.user_id WHERE order_id = '$Oid'";
+            $result = $this->conn->query($sql);
+
+            if($result == TRUE)
+            {
+                return $result->fetch_assoc();
+            }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
+            }
+        }
+
+        public function get_orderItems($Oid){
+
+            $sql = "SELECT * FROM order_items INNER JOIN menu ON menu.menu_id = order_items.product_id WHERE order_id = '$Oid'";
+            $result = $this->conn->query($sql);
+
+            if($result == TRUE)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $data[] = $row;
+                }
+                    return $data;
+            }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
+            }
+        }
+
+        public function sum_subtotal($Oid){
+
+            $datas = $this->get_orderItems($Oid);
+
+                foreach($datas as $data)
+                {
+                    $sub += ($data["menu_price"] * $data["quantity"]);
+                }
+                    return $sub;
+        }
+
+        public function check_status($status){
+
+            if($status != "A")
+            {
+                header("Location: ../home.php");
+            }
+        }
+
+        public function update_orderStatus($Oid){
+
+            $sql = "UPDATE orders SET order_status ='Delivered' WHERE order_id = '$Oid'";
+
+            if($this->conn->query($sql))
+            {
+                header("Location: ../admin/order-details.php?order_id=$Oid");
+            }
+            else
+            {
+                echo "<p class='alert text-center'>".$this->conn->error."</p>";
+            }
+        }
     }
 ?>              

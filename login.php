@@ -51,7 +51,7 @@
     
     <!-- navbar -->
     <div id="site-header">
-        <header id="header" class="header-block-top">
+        <header id="header" class="header-block-top" style="background-color: black;">
             <div class="container">
                 <div class="row">
                     <div class="main-menu">
@@ -65,7 +65,7 @@
                                 </button>
                                 <div class="logo">
                                     <a class="navbar-brand js-scroll-trigger logo-header" href="#">
-                                        <img src="images/logo.png" alt="logo">
+                                         <img src="images/logo-locale.png" alt="" style="width: 300px;">
                                     </a>
                                 </div>
                             </div>
@@ -73,13 +73,14 @@
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="home.php">Home</a></li>
                                     <li><a href="menu.php">Menu</a></li>
-                                    <li><a href="about.php">About us</a></li>
-                    <?php   if($_SESSION["role"] == "U"){?>
+                <?php   if(!empty($_SESSION["role"])){
+                            if($_SESSION["role"] == "U"){?>
                                     <li><a href="cart.php" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>
                                     <li><a href="profile.php" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
-                    <?php   }elseif($_SESSION["role"] == "A"){?>
+                <?php       }elseif($_SESSION["role"] == "A"){?>
                                     <li><a href="edit.php" style="font-size: 22px;"><i class="fas fa-cog"></i></a></li>
-                    <?php   }else{?>
+                <?php       }
+                        }else{?>
                                     <li  class="active"><a href="login.php" style="font-size: 22px;"><i class="fas fa-user"></i></a></li>
                     <?php   }?>
                                 </ul>
@@ -100,8 +101,8 @@
 
 
 
-    <div class="container" style="margin-left: auto;margin-right: auto; margin-top: 100px; width: 335px;">
-        <h1 class="text-center block-title" style="margin-top: 20px; margin-bottom: 40px;">Sign In</h1>
+    <div class="container" style="margin-left: auto;margin-right: auto; margin-top: 100px; margin-bottom:200px; width: 335px;">
+        <h1 class="text-center block-title" style="margin-top: 100px; margin-bottom: 40px;">Sign In</h1>
         <form action="actions/login.php" method="post">
                 <label for="email">E-mail</label><br>
                 <input type="email" name="email" id="email" class="form-control" required auto-focus>
@@ -117,7 +118,18 @@
     </div>
 
 
-
+    <div id="copyright" class="copyright-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h6 class="copy-title"> Copyright &copy; 2021 Kitcken Locale</h6>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end copyright-main -->
 
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
 
