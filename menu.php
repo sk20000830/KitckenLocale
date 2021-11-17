@@ -55,6 +55,7 @@
 
     $Cid = $_SESSION["user_id"];
     $status = $_SESSION["status"];
+    $Pname = $user->get_productName();
 
 
 ?>

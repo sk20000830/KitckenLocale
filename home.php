@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
 
     <!-- Site Metas -->
-    <title>Kitcken Napoli</title>
+    <title>Kitchen Locale</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
