@@ -16,11 +16,11 @@
         $Ostatus = $_GET["Ostatus"];
         $email = $_GET["email"];
 
-        require "../classes/admin.php";
+        require "admin.php";
         $admin = new Admin();
         $Dtime = $admin -> display_delivery();
         $Dstatus = $admin -> get_Dstatus();
-        // $orderdata = $admin -> get_orderData($Ostatus, $email);
+        $orderdata = $admin -> get_orderData($Ostatus, $email);
         $admin->check_status($status);
     ?>
 <body>
