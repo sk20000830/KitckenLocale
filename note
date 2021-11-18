@@ -3,3 +3,10 @@ mysql://b253046c03465b:fa791713@us-cdbr-east-04.cleardb.com/heroku_b3d06f3744f8a
 UN: b253046c03465b
 PW: fa791713
 HOST: us-cdbr-east-04.cleardb.com
+
+
+mysql://b777d06a42d09e:beb99d0b@us-cdbr-east-04.cleardb.com/heroku_936d64cd73d8cd1?reconnect=true
+
+b777d06a42d09e
+beb99d0b
+us-cdbr-east-04.cleardb.com
