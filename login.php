@@ -71,7 +71,7 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="home.php">Home</a></li>
+                                    <li><a href="index.php">Home</a></li>
                                     <li><a href="menu.php">Menu</a></li>
                 <?php   if(!empty($_SESSION["role"])){
                             if($_SESSION["role"] == "U"){?>

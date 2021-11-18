@@ -56,7 +56,7 @@
                         </a>
                     </li>                                           
                     <li class="nav-item mx-3">
-                       <a href="../home.php" 
+                       <a href="../index.php" 
                           class="nav-link">Browse
                         </a>
                     </li>

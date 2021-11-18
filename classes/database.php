@@ -1,12 +1,12 @@
 <?php
 
    class Database{
-
+       
        //information about your database
-        private $servername = "localhost";
-        private $username = "root";
-        private $password = "root";
-        private $database = "portfolio";
+        private $servername = "mysql://b253046c03465b:fa791713@us-cdbr-east-04.cleardb.com/heroku_b3d06f3744f8a2b?reconnect=true";
+        private $username = "b253046c03465b";
+        private $password = "fa791713";
+        private $database = "heroku_b3d06f3744f8a2b";
         public $conn;
 
 

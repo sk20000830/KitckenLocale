@@ -82,7 +82,7 @@
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
-                                    <li><a href="home.php">Home</a></li>
+                                    <li><a href="index.php">Home</a></li>
                                     <li><a href="menu.php">Menu</a></li>
                     <?php   if($status == "U"){?>
                                     <li><a href="cart.php" style="font-size: 22px;"><i class="fas fa-shopping-cart"></i></a></li>

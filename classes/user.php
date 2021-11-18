@@ -27,7 +27,7 @@ class User extends Database{
                         }
                         else
                         {                                     
-                            header("Location: ../home.php");     
+                            header("Location: ../index.php");     
                         }
                     }
                     else

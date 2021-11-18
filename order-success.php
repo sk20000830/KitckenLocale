@@ -39,7 +39,7 @@ $Ddata = $user->get_deliveryTime($Oid);
                 <h1>Thank you very much !!!</h1>
                 <h5 class="mt-5">Esitimate Arriving Time: <span class="text-danger"><?=$Ddata['delivery_time']?></span></h5>
                 <h5 class="mt-5">Total Price: <span class="text-danger"><?=$Ddata['total_price']?>$</span></h5>
-                <a href="home.php" class="btn btn-warning mt-5">GO BACK TO HOME</a>
+                <a href="index.php" class="btn btn-warning mt-5">GO BACK TO HOME</a>
             </div>
         </div>
 

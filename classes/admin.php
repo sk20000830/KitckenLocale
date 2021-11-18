@@ -429,7 +429,7 @@
 
             if($status != "A")
             {
-                header("Location: ../home.php");
+                header("Location: ../index.php");
             }
         }
 
