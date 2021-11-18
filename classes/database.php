@@ -3,10 +3,10 @@
    class Database{
 
        //information about your database
-        private $servername = "http://localhost:8888/phpMyAdmin5/index.php?route=/database/structure&db=heroku_b3d06f3744f8a2b&server=2";
-        private $username = "b253046c03465b";
-        private $password = "fa791713";
-        private $database = "heroku_b3d06f3744f8a2b";
+        private $servername = "mysql://b253046c03465b:fa791713@us-cdbr-east-04.cleardb.com/heroku_b3d06f3744f8a2b?reconnect=true";
+        private $username = "b777d06a42d09e";
+        private $password = "beb99d0b";
+        private $database = "heroku_936d64cd73d8cd1";
         public $conn;
 
 
