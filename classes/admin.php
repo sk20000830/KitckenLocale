@@ -69,11 +69,11 @@
 
             if($row["delivery_status"] == "A")
             {
-                return Available;
+                return "Available";
             }
             elseif($row["delivery_status"] == "U")
             {
-                return Unavailable;
+                return "Unavailable";
             }
         }
 
