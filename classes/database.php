@@ -3,7 +3,7 @@
    class Database{
 
        //information about your database
-        private $servername = "mysql://b253046c03465b:fa791713@us-cdbr-east-04.cleardb.com/heroku_b3d06f3744f8a2b?reconnect=true";
+        private $servername = "us-cdbr-east-04.cleardb.com";
         private $username = "b777d06a42d09e";
         private $password = "beb99d0b";
         private $database = "heroku_936d64cd73d8cd1";
